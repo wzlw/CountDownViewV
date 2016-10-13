@@ -14,8 +14,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import com.zl.countdownview.utils.SizeUtils;
-
 
 /**
  * Created by zl on 16/10/12.
@@ -57,7 +55,7 @@ public class CountDownView extends View {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CountDownView);
         int bgColor = ta.getColor(R.styleable.CountDownView_background_color, Color.GRAY);
         int progressColor = ta.getColor(R.styleable.CountDownView_progress_color, Color.GREEN);
-        float textSize = ta.getDimension(R.styleable.CountDownView_text_size, SizeUtils.dip2px(context, 10));
+        float textSize = ta.getDimension(R.styleable.CountDownView_text_size, dip2px(context, 10));
         mText = ta.getString(R.styleable.CountDownView_text);
         int textColor = ta.getColor(R.styleable.CountDownView_text_color, Color.WHITE);
 
@@ -134,6 +132,11 @@ public class CountDownView extends View {
     public interface OnCountDownListener{
         void start();
         void finish();
+    }
+
+    private int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
 }
